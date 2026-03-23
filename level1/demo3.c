@@ -1,62 +1,77 @@
-#include<stdio.h>
+#include <stdio.h>
+
 typedef struct {
-    	float length;
-    	float width;
-    	float area;
+    float length;
+    float width;
+    float area;
 } Rectangle;
-void input(int n, Rectangle rect[n])
+Rectangle input()
+{
+    Rectangle rect;
+    printf("Enter length: ");
+    scanf("%f", &rect.length);
+    printf("Enter width: ");
+    scanf("%f", &rect.width);
+    return rect;
+}
+void inputMany(int n, Rectangle rect[])
 {
     for(int i = 0; i < n; i++)
     {
         printf("\nRectangle %d\n", i + 1);
-        printf("Enter length: ");
-        scanf("%f", &rect[i].length);
-        printf("Enter width: ");
-        scanf("%f", &rect[i].width);
+        rect[i] = input();   
     }
 }
-void calculate_area(int n, Rectangle rect[n])
+void calculate_area(int n, Rectangle rect[])
 {
     for(int i = 0; i < n; i++)
     {
-        rect[i].area=rect[i].length*rect[i].width;
+        rect[i].area = rect[i].length * rect[i].width;
     }
 }
-int findLargestArea(int n, Rectangle rect[n])
+int findLargestArea(int n, Rectangle rect[])
 {
-    int largest=0;
+    int largest = 0;
     for(int i = 1; i < n; i++)
     {
         if(rect[i].area > rect[largest].area)
         {
-            largest=i;
+            largest = i;
         }
     }
     return largest;
 }
-void output(int largestIndex, Rectangle rect[])
+
+/* Output */
+void output(int n, int largestIndex, Rectangle rect[])
 {
-    printf("AREAS OF RECTANGLE\n");
-    for(int i = 0; i <= largestIndex; i++)
+    printf("\nAREAS OF RECTANGLES\n");
+    for(int i = 0; i < n; i++)
     {
         printf("Rectangle %d Area = %.2f\n", i + 1, rect[i].area);
     }
-    printf("AREA OF LARGEST RECTANGLE\n");
+
+    printf("\nLARGEST RECTANGLE\n");
     printf("Length = %.2f\n", rect[largestIndex].length);
     printf("Width = %.2f\n", rect[largestIndex].width);
     printf("Area = %.2f\n", rect[largestIndex].area);
 }
+
 int main()
 {
     int n, largestIndex;
+
     printf("Enter number of rectangles: ");
     scanf("%d", &n);
+
     Rectangle rect[n];
-    input(n,rect);
-    calculate_area(n,rect);
-    largestIndex=findLargestArea(n,rect);
-    output(largestIndex,rect);
+
+    inputMany(n, rect);
+    calculate_area(n, rect);
+
+    largestIndex = findLargestArea(n, rect);
+
+    output(n, largestIndex, rect);
+
     return 0;
 }
-
-
