@@ -42,7 +42,7 @@ int findLargestArea(int n, Rectangle rect[])
     return largest;
 }
 
-/* Output */
+
 void output(int n, int largestIndex, Rectangle rect[])
 {
     printf("\nAREAS OF RECTANGLES\n");
